@@ -1,0 +1,14 @@
+build/
+.gradle/
+src/generated/
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
+run/
+logs/
+source/
+net/
+*.jar
+.claude/
