@@ -1,6 +1,8 @@
 name: Release
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       bump:
@@ -19,6 +21,8 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    # Skip release commits to prevent infinite loop
+    if: "!startsWith(github.event.head_commit.message, 'release:')"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,23 +45,44 @@ jobs:
           version=$(grep '^mod_version=' gradle.properties | cut -d'=' -f2)
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
+      - name: Determine bump type
+        id: bumptype
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "bump=${{ inputs.bump }}" >> "$GITHUB_OUTPUT"
+          else
+            # Auto-detect from commit messages since last tag
+            last_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+            if [ -n "$last_tag" ]; then
+              commits=$(git log "${last_tag}..HEAD" --pretty=format:"%s")
+            else
+              commits=$(git log --pretty=format:"%s" -20)
+            fi
+
+            if echo "$commits" | grep -qiE '^(breaking|major)'; then
+              echo "bump=major" >> "$GITHUB_OUTPUT"
+            elif echo "$commits" | grep -qiE '^feat'; then
+              echo "bump=minor" >> "$GITHUB_OUTPUT"
+            else
+              echo "bump=patch" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
       - name: Bump version
         id: bump
         run: |
           current="${{ steps.current.outputs.version }}"
           IFS='.' read -ra parts <<< "$current"
 
-          case "${{ inputs.bump }}" in
+          case "${{ steps.bumptype.outputs.bump }}" in
             major)
               parts[0]=$(( ${parts[0]} + 1 ))
-              # Reset all subsequent parts to 0
               for i in $(seq 1 $(( ${#parts[@]} - 1 ))); do
                 parts[$i]=0
               done
               ;;
             minor)
               parts[1]=$(( ${parts[1]} + 1 ))
-              # Reset all parts after minor to 0
               for i in $(seq 2 $(( ${#parts[@]} - 1 ))); do
                 parts[$i]=0
               done
@@ -70,7 +95,7 @@ jobs:
 
           new_version=$(IFS='.'; echo "${parts[*]}")
           echo "version=$new_version" >> "$GITHUB_OUTPUT"
-          echo "Bumping $current -> $new_version"
+          echo "Bumping $current -> $new_version (${{ steps.bumptype.outputs.bump }})"
 
       - name: Update gradle.properties
         run: |
@@ -81,8 +106,7 @@ jobs:
         run: |
           version="${{ steps.bump.outputs.version }}"
 
-          # Check if this version already has an entry, otherwise use Unreleased
-          # Extract the section between this version header and the next version header
+          # Extract the Unreleased or matching version section
           changelog=$(awk -v ver="$version" '
             BEGIN { found=0; collecting=0 }
             /^## \[/ {
@@ -94,7 +118,7 @@ jobs:
             collecting { print }
           ' CHANGELOG.md)
 
-          # If no entry found for this version, generate from git log
+          # If no entry found, generate from git log since last tag
           if [ -z "$changelog" ]; then
             echo "No changelog entry found, generating from commits..."
             last_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
@@ -107,7 +131,6 @@ jobs:
           ${commits}"
           fi
 
-          # Write to file to preserve multiline
           echo "$changelog" > /tmp/changelog_body.txt
           echo "body_file=/tmp/changelog_body.txt" >> "$GITHUB_OUTPUT"
 
@@ -116,7 +139,6 @@ jobs:
           version="${{ steps.bump.outputs.version }}"
           date=$(date +%Y-%m-%d)
 
-          # If there's an [Unreleased] section, rename it to the new version
           if grep -q '^\## \[Unreleased\]' CHANGELOG.md; then
             sed -i "s/^## \[Unreleased\]/## [$version] - $date/" CHANGELOG.md
           fi
@@ -126,6 +148,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add gradle.properties CHANGELOG.md
+          git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "release: v${{ steps.bump.outputs.version }}"
           git tag "v${{ steps.bump.outputs.version }}"
           git push origin HEAD --tags
