@@ -2,7 +2,8 @@ package li.cil.scannable.common.item;
 
 import li.cil.scannable.api.API;
 import li.cil.scannable.common.scanning.*;
-import net.minecraft.core.registries.Registries;
+
+import java.util.function.Supplier;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -14,7 +15,7 @@ public final class Items {
 
     public static final DeferredItem<ScannerItem> SCANNER = ITEMS.register("scanner", () -> new ScannerItem(new Item.Properties().stacksTo(1)));
 
-    public static final DeferredItem<Item> BLANK_MODULE = ITEMS.register("blank_module", ModItem::new);
+    public static final DeferredItem<Item> BLANK_MODULE = ITEMS.register("blank_module", (Supplier<Item>) ModItem::new);
     public static final DeferredItem<ScannerModuleItem> RANGE_MODULE = ITEMS.register("range_module", () -> new ScannerModuleItem(RangeScannerModule.INSTANCE));
     public static final DeferredItem<ConfigurableEntityScannerModuleItem> ENTITY_MODULE = ITEMS.register("entity_module", ConfigurableEntityScannerModuleItem::new);
     public static final DeferredItem<ScannerModuleItem> FRIENDLY_ENTITY_MODULE = ITEMS.register("friendly_entity_module", () -> new ScannerModuleItem(FriendlyEntityScannerModule.INSTANCE));

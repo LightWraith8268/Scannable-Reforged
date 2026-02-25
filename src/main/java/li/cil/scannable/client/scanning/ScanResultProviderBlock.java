@@ -251,7 +251,7 @@ public final class ScanResultProviderBlock extends AbstractScanResultProvider {
 
     public static RenderType getBlockScanResultRenderLayer() {
         return RenderType.create("scan_result",
-            DefaultVertexFormat.POSITION_COLOR_TEX,
+            DefaultVertexFormat.POSITION_TEX_COLOR,
             VertexFormat.Mode.QUADS,
             65536,
             false,
@@ -276,7 +276,7 @@ public final class ScanResultProviderBlock extends AbstractScanResultProvider {
             RenderSystem.colorMask(false, false, false, false);
             poseStack.pushPose();
             try {
-                Minecraft.getInstance().gameRenderer.renderItemInHand(poseStack, renderInfo, partialTicks);
+                Minecraft.getInstance().gameRenderer.renderItemInHand(renderInfo, partialTicks, poseStack.last().pose());
             } catch (final Throwable e) {
                 LOGGER.catching(e);
             }

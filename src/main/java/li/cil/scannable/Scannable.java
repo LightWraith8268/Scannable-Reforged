@@ -21,7 +21,7 @@ public class Scannable {
 
     public Scannable(IEventBus modEventBus, ModContainer modContainer) {
         // Config
-        ConfigManager.register(modContainer);
+        ConfigManager.initialize(modContainer);
 
         // Registries
         ModDataComponents.COMPONENTS.register(modEventBus);

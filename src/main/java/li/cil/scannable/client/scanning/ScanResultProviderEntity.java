@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -55,8 +56,10 @@ public final class ScanResultProviderEntity extends AbstractScanResultProvider {
         }
 
         entities.clear();
-        for (final Entity entity : player.level().getEntities().getAll()) {
-            entities.add(entity);
+        if (player.level() instanceof ClientLevel clientLevel) {
+            for (final Entity entity : clientLevel.entitiesForRendering()) {
+                entities.add(entity);
+            }
         }
         currentEntityIndex = 0;
         entitiesStep = Mth.ceil(entities.size() / (float) scanTicks);

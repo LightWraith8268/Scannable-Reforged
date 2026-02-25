@@ -46,7 +46,7 @@ public final class ClientSetup {
     public static void onRegisterGuiLayers(final RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.CROSSHAIR,
             ResourceLocation.fromNamespaceAndPath(API.MOD_ID, "scanner_overlay"),
-            (graphics, partialTick) -> OverlayRenderer.render(graphics, partialTick));
+            (graphics, deltaTracker) -> OverlayRenderer.render(graphics, deltaTracker.getGameTimeDeltaPartialTick(false)));
     }
 
     // --------------------------------------------------------------------- //
