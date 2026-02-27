@@ -1,0 +1,39 @@
+modLoader="javafml"
+loaderVersion="[${loaderVersion},)"
+license="MIT"
+issueTrackerURL="https://github.com/MightyPirates/Scannable/issues"
+
+[[mods]]
+modId="scannable"
+version="${version}"
+displayName="Scannable"
+logoFile="logo.png"
+authors="Sangar"
+description='''A scanner that scans.'''
+
+[[mixins]]
+config="scannable-common.mixins.json"
+
+[[mixins]]
+config="scannable.mixins.json"
+
+[[dependencies.scannable]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neoforgeVersion},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.scannable]]
+    modId="minecraft"
+    type="required"
+    versionRange="[${minecraftVersion},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.scannable]]
+    modId="architectury"
+    type="required"
+    versionRange="[${architecturyVersion},)"
+    ordering="NONE"
+    side="BOTH"

@@ -10,5 +10,6 @@ run/
 logs/
 source/
 net/
+dev/
 *.jar
 .claude/
