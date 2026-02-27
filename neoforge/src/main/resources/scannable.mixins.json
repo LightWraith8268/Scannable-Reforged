@@ -1,0 +1,12 @@
+{
+    "required": true,
+    "package": "li.cil.scannable.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "minVersion": "0.8",
+    "client": [
+        "ScannerItemMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

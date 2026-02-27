@@ -1,0 +1,12 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "li.cil.scannable.mixin.fabric",
+    "compatibilityLevel": "JAVA_21",
+    "mixins": [
+        "MixinScannerItem"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
