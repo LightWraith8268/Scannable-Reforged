@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "scannable:item/blank_module",
-    "layer1": "scannable:item/module_slot",
-    "layer2": "scannable:item/chest_module"
-  }
-}

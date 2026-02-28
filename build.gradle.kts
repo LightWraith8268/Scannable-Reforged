@@ -9,14 +9,6 @@ plugins {
     alias(libs.plugins.shadow) apply false
 }
 
-// Root project has no source code - disable compilation of legacy src/ directory
-sourceSets {
-    main {
-        java.setSrcDirs(emptyList<String>())
-        resources.setSrcDirs(emptyList<String>())
-    }
-}
-
 val modId: String by project
 val modVersion: String by project
 val mavenGroup: String by project
