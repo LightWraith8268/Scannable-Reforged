@@ -3,14 +3,11 @@
   "category": "misc",
   "group": "scanner_module",
   "ingredients": [
-    {
-      "item": "scannable:blank_module"
-    },
-    {
-      "item": "minecraft:coal"
-    }
+    "scannable:blank_module",
+    "minecraft:coal"
   ],
   "result": {
-    "item": "scannable:common_ores_module"
+    "id": "scannable:common_ores_module",
+    "count": 1
   }
 }
