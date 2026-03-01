@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "scannable:blank_module"
-            ]
+            "items": "scannable:blank_module"
           }
         ]
       },

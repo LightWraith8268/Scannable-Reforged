@@ -3,14 +3,11 @@
   "category": "misc",
   "group": "scanner_module",
   "ingredients": [
-    {
-      "item": "scannable:blank_module"
-    },
-    {
-      "tag": "c:leathers"
-    }
+    "scannable:blank_module",
+    "#c:leathers"
   ],
   "result": {
-    "item": "scannable:friendly_entity_module"
+    "id": "scannable:friendly_entity_module",
+    "count": 1
   }
 }
