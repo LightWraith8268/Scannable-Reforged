@@ -42,7 +42,7 @@ jobs:
       - name: Read current version
         id: current
         run: |
-          version=$(grep '^mod_version=' gradle.properties | cut -d'=' -f2)
+          version=$(grep '^modVersion=' gradle.properties | cut -d'=' -f2)
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Determine bump type
@@ -99,7 +99,7 @@ jobs:
 
       - name: Update gradle.properties
         run: |
-          sed -i "s/^mod_version=.*/mod_version=${{ steps.bump.outputs.version }}/" gradle.properties
+          sed -i "s/^modVersion=.*/modVersion=${{ steps.bump.outputs.version }}/" gradle.properties
 
       - name: Extract changelog for this version
         id: changelog
@@ -156,12 +156,14 @@ jobs:
       - name: Build
         run: ./gradlew build
 
-      - name: Find built jar
-        id: jar
+      - name: Find built jars
+        id: jars
         run: |
-          jar=$(find build/libs -name "*.jar" ! -name "*-sources.jar" ! -name "*-javadoc.jar" | head -1)
-          echo "path=$jar" >> "$GITHUB_OUTPUT"
-          echo "name=$(basename $jar)" >> "$GITHUB_OUTPUT"
+          # Architectury multi-loader: JARs are in fabric/build/libs and neoforge/build/libs
+          fabric_jar=$(find fabric/build/libs -name "*.jar" ! -name "*-dev.jar" ! -name "*-dev-shadow.jar" ! -name "*-sources.jar" | head -1)
+          neoforge_jar=$(find neoforge/build/libs -name "*.jar" ! -name "*-dev.jar" ! -name "*-dev-shadow.jar" ! -name "*-sources.jar" | head -1)
+          echo "fabric_path=$fabric_jar" >> "$GITHUB_OUTPUT"
+          echo "neoforge_path=$neoforge_jar" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -169,6 +171,8 @@ jobs:
           tag_name: "v${{ steps.bump.outputs.version }}"
           name: "Scannable Reforged v${{ steps.bump.outputs.version }}"
           body_path: /tmp/changelog_body.txt
-          files: ${{ steps.jar.outputs.path }}
+          files: |
+            ${{ steps.jars.outputs.fabric_path }}
+            ${{ steps.jars.outputs.neoforge_path }}
           draft: false
           prerelease: false
