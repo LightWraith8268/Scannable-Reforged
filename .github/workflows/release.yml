@@ -94,6 +94,16 @@ jobs:
           esac
 
           new_version=$(IFS='.'; echo "${parts[*]}")
+
+          # If tag already exists, keep bumping patch until we find an unused version
+          while git rev-parse "v${new_version}" >/dev/null 2>&1; do
+            echo "Tag v${new_version} already exists, bumping patch..."
+            IFS='.' read -ra parts <<< "$new_version"
+            last=$(( ${#parts[@]} - 1 ))
+            parts[$last]=$(( ${parts[$last]} + 1 ))
+            new_version=$(IFS='.'; echo "${parts[*]}")
+          done
+
           echo "version=$new_version" >> "$GITHUB_OUTPUT"
           echo "Bumping $current -> $new_version (${{ steps.bumptype.outputs.bump }})"
 
