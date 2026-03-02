@@ -3,7 +3,11 @@ package li.cil.scannable.client.neoforge;
 import li.cil.scannable.api.API;
 import li.cil.scannable.client.ClientSetup;
 import li.cil.scannable.client.ScanManager;
+import li.cil.scannable.client.gui.ConfigurableBlockScannerModuleContainerScreen;
+import li.cil.scannable.client.gui.ConfigurableEntityScannerModuleContainerScreen;
+import li.cil.scannable.client.gui.ScannerContainerScreen;
 import li.cil.scannable.client.renderer.OverlayRenderer;
+import li.cil.scannable.common.container.Containers;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -12,6 +16,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.common.NeoForge;
@@ -19,6 +24,13 @@ import net.neoforged.neoforge.common.NeoForge;
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = API.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class ClientSetupNeoForge {
+    @SubscribeEvent
+    public static void handleRegisterMenuScreensEvent(final RegisterMenuScreensEvent event) {
+        event.register(Containers.SCANNER_CONTAINER.get(), ScannerContainerScreen::new);
+        event.register(Containers.BLOCK_MODULE_CONTAINER.get(), ConfigurableBlockScannerModuleContainerScreen::new);
+        event.register(Containers.ENTITY_MODULE_CONTAINER.get(), ConfigurableEntityScannerModuleContainerScreen::new);
+    }
+
     @SubscribeEvent
     public static void handleSetupEvent(final FMLClientSetupEvent event) {
         ClientSetup.initialize();
