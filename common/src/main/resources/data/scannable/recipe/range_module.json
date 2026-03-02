@@ -3,11 +3,15 @@
   "category": "misc",
   "group": "scanner_module",
   "ingredients": [
-    "scannable:blank_module",
-    "#c:ender_pearls"
+    {
+      "item": "scannable:blank_module"
+    },
+    {
+      "tag": "c:ender_pearls"
+    }
   ],
   "result": {
-    "id": "scannable:range_module",
-    "count": 1
+    "count": 1,
+    "id": "scannable:range_module"
   }
 }

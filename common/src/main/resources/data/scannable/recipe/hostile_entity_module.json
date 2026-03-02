@@ -3,11 +3,15 @@
   "category": "misc",
   "group": "scanner_module",
   "ingredients": [
-    "scannable:blank_module",
-    "#c:bones"
+    {
+      "item": "scannable:blank_module"
+    },
+    {
+      "tag": "c:bones"
+    }
   ],
   "result": {
-    "id": "scannable:hostile_entity_module",
-    "count": 1
+    "count": 1,
+    "id": "scannable:hostile_entity_module"
   }
 }
