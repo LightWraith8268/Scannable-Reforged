@@ -1,6 +1,5 @@
 package li.cil.scannable.common.item;
 
-import dev.architectury.registry.menu.ExtendedMenuProvider;
 import dev.architectury.registry.menu.MenuRegistry;
 import li.cil.scannable.common.config.Constants;
 import li.cil.scannable.common.config.Strings;
@@ -9,7 +8,6 @@ import li.cil.scannable.common.data.ModDataComponents;
 import li.cil.scannable.common.scanning.ConfigurableBlockScannerModule;
 import li.cil.scannable.common.scanning.filter.IgnoredBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -161,7 +159,7 @@ public final class ConfigurableBlockScannerModuleItem extends ScannerModuleItem 
         }
 
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
-            MenuRegistry.openExtendedMenu(serverPlayer, new ExtendedMenuProvider() {
+            MenuRegistry.openExtendedMenu(serverPlayer, new MenuProvider() {
                 @Override
                 public Component getDisplayName() {
                     return stack.getHoverName();
@@ -171,12 +169,7 @@ public final class ConfigurableBlockScannerModuleItem extends ScannerModuleItem 
                 public AbstractContainerMenu createMenu(final int id, final Inventory inventory, final Player player) {
                     return new BlockModuleContainerMenu(id, inventory, hand);
                 }
-
-                @Override
-                public void saveExtraData(final FriendlyByteBuf buffer) {
-                    buffer.writeEnum(hand);
-                }
-            });
+            }, buffer -> buffer.writeEnum(hand));
         }
 
         return InteractionResultHolder.success(stack);

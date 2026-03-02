@@ -9,9 +9,7 @@ import li.cil.scannable.common.container.ScannerContainerMenu;
 import li.cil.scannable.common.energy.ItemEnergyStorage;
 import li.cil.scannable.common.inventory.ScannerContainer;
 import net.minecraft.network.chat.Component;
-import dev.architectury.registry.menu.ExtendedMenuProvider;
 import dev.architectury.registry.menu.MenuRegistry;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
@@ -49,6 +47,8 @@ public final class ScannerItem extends ModItem {
     public void appendHoverText(final ItemStack stack, final Item.TooltipContext context, final List<Component> tooltip, final TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
 
+        tooltip.add(Strings.TOOLTIP_SCANNER_OPEN_MODULES);
+
         if (CommonConfig.useEnergy) {
             ItemEnergyStorage.of(stack).ifPresent(energy ->
                 tooltip.add(Strings.energyStorage(energy.getEnergyStored(), energy.getMaxEnergyStored())));
@@ -75,7 +75,7 @@ public final class ScannerItem extends ModItem {
         final ItemStack stack = player.getItemInHand(hand);
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
-                MenuRegistry.openExtendedMenu(serverPlayer, new ExtendedMenuProvider() {
+                MenuRegistry.openExtendedMenu(serverPlayer, new MenuProvider() {
                     @Override
                     public Component getDisplayName() {
                         return stack.getHoverName();
@@ -85,12 +85,7 @@ public final class ScannerItem extends ModItem {
                     public AbstractContainerMenu createMenu(final int id, final Inventory inventory, final Player player) {
                         return new ScannerContainerMenu(id, inventory, hand, ScannerContainer.of(stack));
                     }
-
-                    @Override
-                    public void saveExtraData(final FriendlyByteBuf buffer) {
-                        buffer.writeEnum(hand);
-                    }
-                });
+                }, buffer -> buffer.writeEnum(hand));
             }
         } else {
             final List<ItemStack> modules = new ArrayList<>();

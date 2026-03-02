@@ -10,6 +10,8 @@ public final class Strings {
 
     public static final Component CREATIVE_TAB_TITLE = Component.translatable("itemGroup.scannable.common");
 
+    public static final Component TOOLTIP_SCANNER_OPEN_MODULES = Component.translatable("tooltip.scannable.scanner.open_modules").withStyle(GRAY);
+
     public static final Component TOOLTIP_BLOCKS_LIST_CAPTION = Component.translatable("item.scannable.block_module.list").withStyle(GRAY);
     public static final Component TOOLTIP_ENTITIES_LIST_CAPTION = Component.translatable("item.scannable.entity_module.list").withStyle(GRAY);
 
