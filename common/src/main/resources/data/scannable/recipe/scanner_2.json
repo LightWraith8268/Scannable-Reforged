@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "scanner",
+  "key": {
+    "s": {
+      "item": "scannable:scanner"
+    },
+    "d": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "pattern": [
+    " d ",
+    "dsd",
+    " d "
+  ],
+  "result": {
+    "count": 1,
+    "id": "scannable:scanner_2"
+  }
+}

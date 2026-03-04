@@ -15,8 +15,24 @@ public final class CommonConfig {
     public static boolean useEnergy = true;
 
     @Path("energy") @WorldRestart @Min(0)
-    @Comment("Amount of energy that can be stored in a scanner.")
+    @Comment("Amount of energy that can be stored in a Scanner I.")
     public static int energyCapacityScanner = 5000;
+
+    @Path("energy") @WorldRestart @Min(0)
+    @Comment("Amount of energy that can be stored in a Scanner II.")
+    public static int energyCapacityScanner2 = 15000;
+
+    @Path("energy") @WorldRestart @Min(0)
+    @Comment("Amount of energy that can be stored in a Scanner III.")
+    public static int energyCapacityScanner3 = 75000;
+
+    @Path("energy") @WorldRestart @Min(0)
+    @Comment("Amount of energy that can be stored in a Scanner IV.")
+    public static int energyCapacityScanner4 = 525000;
+
+    @Path("energy") @WorldRestart @Min(0)
+    @Comment("Amount of energy that can be stored in a Scanner V.")
+    public static int energyCapacityScanner5 = 4725000;
 
     @Path("energy") @WorldRestart @Min(0)
     @Comment("Amount of energy used by the range module (tier 1) per scan.")
@@ -102,10 +118,25 @@ public final class CommonConfig {
     @Comment("Relative effective range of the chest module.")
     public static float rangeModifierModuleChest = 0.25f;
 
-    @Path("general") @WorldRestart @Min(16) @Max(128)
-    @Comment("The basic scan radius without range modules. Higher values mean more computational\n" +
-        "overhead and thus potentially worse performance while scanning.")
+    @Path("general") @WorldRestart @Min(16) @Max(512)
+    @Comment("The basic scan radius for Scanner I without range modules.")
     public static int baseScanRadius = 64;
+
+    @Path("general") @WorldRestart @Min(16) @Max(512)
+    @Comment("The basic scan radius for Scanner II without range modules.")
+    public static int baseScanRadius2 = 96;
+
+    @Path("general") @WorldRestart @Min(16) @Max(512)
+    @Comment("The basic scan radius for Scanner III without range modules.")
+    public static int baseScanRadius3 = 144;
+
+    @Path("general") @WorldRestart @Min(16) @Max(512)
+    @Comment("The basic scan radius for Scanner IV without range modules.")
+    public static int baseScanRadius4 = 216;
+
+    @Path("general") @WorldRestart @Min(16) @Max(512)
+    @Comment("The basic scan radius for Scanner V without range modules.")
+    public static int baseScanRadius5 = 324;
 
     @Path("general") @WorldRestart @Min(1000) @Max(60000 * 5)
     @Comment("How long the results from a scan should remain visible, in milliseconds.")

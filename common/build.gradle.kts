@@ -12,4 +12,5 @@ loom {
 dependencies {
     modImplementation(libs.fabric.loader)
     modApi(libs.architectury.api)
+    compileOnly(libs.jei.common.api)
 }

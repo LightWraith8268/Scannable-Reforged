@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "scanner",
+  "key": {
+    "s": {
+      "item": "scannable:scanner_3"
+    },
+    "n": {
+      "item": "minecraft:nether_star"
+    },
+    "i": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    " n ",
+    "isi",
+    " i "
+  ],
+  "result": {
+    "count": 1,
+    "id": "scannable:scanner_4"
+  }
+}

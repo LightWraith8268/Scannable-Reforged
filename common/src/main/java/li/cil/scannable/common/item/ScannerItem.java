@@ -28,16 +28,30 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.IntSupplier;
 
 public final class ScannerItem extends ModItem {
+    private final IntSupplier energyCapacity;
+    private final IntSupplier baseScanRadius;
+
     public static boolean isScanner(final ItemStack stack) {
-        return stack.getItem() == Items.SCANNER.get();
+        return stack.getItem() instanceof ScannerItem;
     }
 
     // --------------------------------------------------------------------- //
 
-    public ScannerItem(final Properties properties) {
+    public ScannerItem(final Properties properties, final IntSupplier energyCapacity, final IntSupplier baseScanRadius) {
         super(properties);
+        this.energyCapacity = energyCapacity;
+        this.baseScanRadius = baseScanRadius;
+    }
+
+    public int getEnergyCapacity() {
+        return energyCapacity.getAsInt();
+    }
+
+    public int getBaseScanRadius() {
+        return baseScanRadius.getAsInt();
     }
 
     // --------------------------------------------------------------------- //
@@ -107,7 +121,7 @@ public final class ScannerItem extends ModItem {
 
             player.startUsingItem(hand);
             if (level.isClientSide()) {
-                ScanManager.beginScan(player, modules);
+                ScanManager.beginScan(player, modules, ((ScannerItem) stack.getItem()).getBaseScanRadius());
                 SoundManager.playChargingSound();
             }
         }

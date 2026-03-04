@@ -9,10 +9,13 @@ import li.cil.scannable.common.config.Strings;
 import li.cil.scannable.common.energy.ItemEnergyStorage;
 import li.cil.scannable.common.item.Items;
 import li.cil.scannable.common.item.ModItem;
+import li.cil.scannable.common.item.ScannerItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public final class ModCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(API.MOD_ID, Registries.CREATIVE_MODE_TAB);
@@ -23,11 +26,14 @@ public final class ModCreativeTabs {
             builder.title(Strings.CREATIVE_TAB_TITLE);
             builder.displayItems((parameters, output) -> {
                 if (CommonConfig.useEnergy) {
-                    final var stack = new ItemStack(Items.SCANNER.get());
-                    ItemEnergyStorage.of(stack).ifPresent(energy -> {
-                        energy.receiveEnergy(Integer.MAX_VALUE, false);
-                        output.accept(stack);
-                    });
+                    for (final RegistrySupplier<ScannerItem> scannerSupplier : List.of(
+                            Items.SCANNER, Items.SCANNER_2, Items.SCANNER_3, Items.SCANNER_4, Items.SCANNER_5)) {
+                        final var stack = new ItemStack(scannerSupplier.get());
+                        ItemEnergyStorage.of(stack).ifPresent(energy -> {
+                            energy.receiveEnergy(Integer.MAX_VALUE, false);
+                            output.accept(stack);
+                        });
+                    }
                 }
 
                 BuiltInRegistries.ITEM.stream()

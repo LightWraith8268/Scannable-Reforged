@@ -33,6 +33,8 @@ dependencies {
     include(modApi(libs.fabric.energy.get().toString()) {
         exclude(group = "net.fabricmc.fabric-api")
     })
+
+    compileOnly(libs.jei.fabric.api)
 }
 
 tasks {

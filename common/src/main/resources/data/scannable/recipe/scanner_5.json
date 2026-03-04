@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "scanner",
+  "key": {
+    "s": {
+      "item": "scannable:scanner_4"
+    },
+    "n": {
+      "item": "minecraft:nether_star"
+    },
+    "d": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "pattern": [
+    "ndn",
+    "dsd",
+    "ndn"
+  ],
+  "result": {
+    "count": 1,
+    "id": "scannable:scanner_5"
+  }
+}

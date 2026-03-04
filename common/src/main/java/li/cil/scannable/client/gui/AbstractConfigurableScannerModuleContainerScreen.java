@@ -41,6 +41,14 @@ public abstract class AbstractConfigurableScannerModuleContainerScreen<TContaine
         inventoryLabelY = 39;
     }
 
+    public int getLeftPos() {
+        return leftPos;
+    }
+
+    public int getTopPos() {
+        return topPos;
+    }
+
     private ItemStack getHeldItem() {
         return menu.getPlayer().getItemInHand(menu.getHand());
     }

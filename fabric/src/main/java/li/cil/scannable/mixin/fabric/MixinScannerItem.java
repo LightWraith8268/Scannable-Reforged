@@ -1,6 +1,5 @@
 package li.cil.scannable.mixin.fabric;
 
-import li.cil.scannable.common.config.CommonConfig;
 import li.cil.scannable.common.item.ScannerItem;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +23,7 @@ public abstract class MixinScannerItem implements FabricItem, SimpleEnergyItem {
 
     @Override
     public long getEnergyCapacity(final ItemStack stack) {
-        return CommonConfig.energyCapacityScanner;
+        return ((ScannerItem) (Object) this).getEnergyCapacity();
     }
 
     @Override
