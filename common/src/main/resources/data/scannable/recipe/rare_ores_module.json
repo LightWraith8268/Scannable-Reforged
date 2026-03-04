@@ -3,11 +3,15 @@
   "category": "misc",
   "group": "scanner_module",
   "ingredients": [
-    "scannable:blank_module",
-    "#c:gems/diamond"
+    {
+      "item": "scannable:blank_module"
+    },
+    {
+      "tag": "c:gems/diamond"
+    }
   ],
   "result": {
-    "id": "scannable:rare_ores_module",
-    "count": 1
+    "count": 1,
+    "id": "scannable:rare_ores_module"
   }
 }

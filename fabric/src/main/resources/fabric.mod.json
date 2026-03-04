@@ -2,14 +2,13 @@
     "schemaVersion": 1,
     "id": "scannable",
     "version": "${version}",
-    "name": "Scannable",
-    "description": "Scan the area for points of interest.",
+    "name": "Scannable Reforged",
+    "description": "Scan the area for points of interest. Reforged for 1.21.1.",
     "authors": [
-        "Sangar",
-        "embeddedt"
+        "LightWraith8268"
     ],
     "contact": {
-        "sources": "https://github.com/MightyPirates/Scannable"
+        "sources": "https://github.com/LightWraith8268/Scannable-Reforged"
     },
     "mixins": [
         "scannable-common.mixins.json",

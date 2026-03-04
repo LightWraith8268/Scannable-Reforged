@@ -1,4 +1,4 @@
-package li.cil.scannable.mixin;
+package li.cil.scannable.mixin.neoforge;
 
 import li.cil.scannable.common.item.ScannerItem;
 import net.minecraft.world.item.ItemStack;

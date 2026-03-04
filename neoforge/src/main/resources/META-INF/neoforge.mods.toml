@@ -1,15 +1,15 @@
 modLoader="javafml"
 loaderVersion="[${loaderVersion},)"
 license="MIT"
-issueTrackerURL="https://github.com/MightyPirates/Scannable/issues"
+issueTrackerURL="https://github.com/LightWraith8268/Scannable-Reforged/issues"
 
 [[mods]]
 modId="scannable"
 version="${version}"
-displayName="Scannable"
+displayName="Scannable Reforged"
 logoFile="logo.png"
-authors="Sangar"
-description='''A scanner that scans.'''
+authors="LightWraith8268"
+description='''A scanner that scans. Reforged for 1.21.1.'''
 
 [[mixins]]
 config="scannable-common.mixins.json"
