@@ -1,6 +1,7 @@
 package li.cil.scannable.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexSorting;
@@ -217,7 +218,7 @@ public final class ScanManager {
     public static void setMatrices(final PoseStack poseStack, final Matrix4f projectionMatrix) {
         worldViewModelStack = new PoseStack();
         worldViewModelStack.last().pose().set(poseStack.last().pose());
-        worldProjectionMatrix = projectionMatrix;
+        worldProjectionMatrix = new Matrix4f(projectionMatrix);
     }
 
     public static void renderLevel(final float partialTick) {
@@ -238,9 +239,14 @@ public final class ScanManager {
 
             RenderSystem.backupProjectionMatrix();
             RenderSystem.setProjectionMatrix(worldProjectionMatrix, VertexSorting.ORTHOGRAPHIC_Z);
+            RenderSystem.getModelViewStack().pushMatrix();
+            RenderSystem.getModelViewStack().identity();
+            RenderSystem.applyModelViewMatrix();
 
             render(ScanResultRenderContext.GUI, partialTick, worldViewModelStack, worldProjectionMatrix);
 
+            RenderSystem.getModelViewStack().popMatrix();
+            RenderSystem.applyModelViewMatrix();
             RenderSystem.restoreProjectionMatrix();
         }
     }
@@ -258,7 +264,7 @@ public final class ScanManager {
         poseStack.pushPose();
         poseStack.translate(-pos.x, -pos.y, -pos.z);
 
-        final MultiBufferSource.BufferSource renderTypeBuffer = Minecraft.getInstance().renderBuffers().bufferSource();
+        final MultiBufferSource.BufferSource renderTypeBuffer = MultiBufferSource.immediate(new ByteBufferBuilder(1536));
         try {
             for (final Map.Entry<ScanResultProvider, List<ScanResult>> entry : renderingResults.entrySet()) {
                 for (final ScanResult result : entry.getValue()) {
