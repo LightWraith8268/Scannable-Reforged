@@ -55,7 +55,7 @@ public final class ClientSetupNeoForge {
 
     private static void handleRenderLevelEvent(final RenderLevelStageEvent event) {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-            ScanManager.setMatrices(event.getPoseStack(), event.getProjectionMatrix());
+            ScanManager.setMatrices(event.getModelViewMatrix(), event.getProjectionMatrix());
             ScanManager.renderLevel(event.getPartialTick().getGameTimeDeltaPartialTick(false));
         }
     }

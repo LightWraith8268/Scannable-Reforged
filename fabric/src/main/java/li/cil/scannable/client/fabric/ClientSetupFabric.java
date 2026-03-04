@@ -15,7 +15,7 @@ public final class ClientSetupFabric implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(instance -> ScanManager.tick());
         WorldRenderEvents.LAST.register(context -> {
-            ScanManager.setMatrices(context.matrixStack(), context.projectionMatrix());
+            ScanManager.setMatrices(context.matrixStack().last().pose(), context.projectionMatrix());
             ScanManager.renderLevel(context.tickCounter().getGameTimeDeltaPartialTick(false));
         });
 
