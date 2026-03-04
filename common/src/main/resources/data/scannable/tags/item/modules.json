@@ -3,6 +3,9 @@
   "values": [
     "scannable:blank_module",
     "scannable:range_module",
+    "scannable:range_module_2",
+    "scannable:range_module_3",
+    "scannable:range_module_4",
     "scannable:entity_module",
     "scannable:friendly_entity_module",
     "scannable:hostile_entity_module",
