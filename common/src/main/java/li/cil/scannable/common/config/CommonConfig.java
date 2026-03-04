@@ -19,8 +19,20 @@ public final class CommonConfig {
     public static int energyCapacityScanner = 5000;
 
     @Path("energy") @WorldRestart @Min(0)
-    @Comment("Amount of energy used by the range module per scan.")
+    @Comment("Amount of energy used by the range module (tier 1) per scan.")
     public static int energyCostModuleRange = 100;
+
+    @Path("energy") @WorldRestart @Min(0)
+    @Comment("Amount of energy used by the range module (tier 2) per scan.")
+    public static int energyCostModuleRange2 = 200;
+
+    @Path("energy") @WorldRestart @Min(0)
+    @Comment("Amount of energy used by the range module (tier 3) per scan.")
+    public static int energyCostModuleRange3 = 400;
+
+    @Path("energy") @WorldRestart @Min(0)
+    @Comment("Amount of energy used by the range module (tier 4) per scan.")
+    public static int energyCostModuleRange4 = 800;
 
     @Path("energy") @WorldRestart @Min(0)
     @Comment("Amount of energy used by the animal module per scan.")
@@ -54,9 +66,21 @@ public final class CommonConfig {
     @Comment("Amount of energy used by the chest module per scan.")
     public static int energyCostModuleChest = 100;
 
-    @Path("range") @WorldRestart @Min(0) @Max(1)
-    @Comment("Relative amount of base scan radius added by each installed range module.")
+    @Path("range") @WorldRestart @Min(0) @Max(5)
+    @Comment("Relative amount of base scan radius added by each installed range module (tier 1).")
     public static float rangeModifierModuleRange = 0.5f;
+
+    @Path("range") @WorldRestart @Min(0) @Max(5)
+    @Comment("Relative amount of base scan radius added by each installed range module (tier 2).")
+    public static float rangeModifierModuleRange2 = 1.0f;
+
+    @Path("range") @WorldRestart @Min(0) @Max(5)
+    @Comment("Relative amount of base scan radius added by each installed range module (tier 3).")
+    public static float rangeModifierModuleRange3 = 1.5f;
+
+    @Path("range") @WorldRestart @Min(0) @Max(5)
+    @Comment("Relative amount of base scan radius added by each installed range module (tier 4).")
+    public static float rangeModifierModuleRange4 = 2.5f;
 
     @Path("range") @WorldRestart @Min(0) @Max(1)
     @Comment("Relative effective range of the common ore module.")
@@ -85,7 +109,7 @@ public final class CommonConfig {
 
     @Path("general") @WorldRestart @Min(1000) @Max(60000 * 5)
     @Comment("How long the results from a scan should remain visible, in milliseconds.")
-    public static int scanStayDuration = 10000;
+    public static int scanStayDuration = 30000;
 
     @Path("blocks") @WorldRestart
     @Comment("""

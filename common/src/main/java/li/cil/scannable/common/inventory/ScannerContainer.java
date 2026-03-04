@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 
 public final class ScannerContainer extends SimpleContainer {
-    private static final int ACTIVE_MODULE_COUNT = 3;
+    private static final int ACTIVE_MODULE_COUNT = 5;
     private static final int INACTIVE_MODULE_COUNT = 6;
     private static final int TOTAL_MODULE_COUNT = ACTIVE_MODULE_COUNT + INACTIVE_MODULE_COUNT;
 

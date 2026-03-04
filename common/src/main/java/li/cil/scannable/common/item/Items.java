@@ -15,7 +15,10 @@ public final class Items {
     public static final RegistrySupplier<ScannerItem> SCANNER = ITEMS.register("scanner", () -> new ScannerItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistrySupplier<Item> BLANK_MODULE = ITEMS.register("blank_module", ModItem::new);
-    public static final RegistrySupplier<ScannerModuleItem> RANGE_MODULE = ITEMS.register("range_module", () -> new ScannerModuleItem(RangeScannerModule.INSTANCE));
+    public static final RegistrySupplier<ScannerModuleItem> RANGE_MODULE = ITEMS.register("range_module", () -> new ScannerModuleItem(RangeScannerModule.TIER_1));
+    public static final RegistrySupplier<ScannerModuleItem> RANGE_MODULE_2 = ITEMS.register("range_module_2", () -> new ScannerModuleItem(RangeScannerModule.TIER_2));
+    public static final RegistrySupplier<ScannerModuleItem> RANGE_MODULE_3 = ITEMS.register("range_module_3", () -> new ScannerModuleItem(RangeScannerModule.TIER_3));
+    public static final RegistrySupplier<ScannerModuleItem> RANGE_MODULE_4 = ITEMS.register("range_module_4", () -> new ScannerModuleItem(RangeScannerModule.TIER_4));
     public static final RegistrySupplier<ConfigurableEntityScannerModuleItem> ENTITY_MODULE = ITEMS.register("entity_module", ConfigurableEntityScannerModuleItem::new);
     public static final RegistrySupplier<ScannerModuleItem> FRIENDLY_ENTITY_MODULE = ITEMS.register("friendly_entity_module", () -> new ScannerModuleItem(FriendlyEntityScannerModule.INSTANCE));
     public static final RegistrySupplier<ScannerModuleItem> HOSTILE_ENTITY_MODULE = ITEMS.register("hostile_entity_module", () -> new ScannerModuleItem(HostileEntityScannerModule.INSTANCE));
