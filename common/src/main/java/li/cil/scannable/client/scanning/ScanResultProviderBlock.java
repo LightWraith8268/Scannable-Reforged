@@ -364,6 +364,20 @@ public final class ScanResultProviderBlock extends AbstractScanResultProvider {
     private record ChunkSectionPos(int chunkX, int chunkZ, int chunkSectionIndex, double squareDistToCenter) {
     }
 
+    /**
+     * Generates a deterministic, visually distinct color from a block's registry name.
+     * Used as fallback when getMapColor() returns 0 (common for modded blocks).
+     */
+    private static int colorFromRegistryName(final net.minecraft.resources.ResourceLocation id) {
+        final int hash = id.toString().hashCode();
+        // Use HSB with high saturation and brightness to ensure vivid, visible colors.
+        final float hue = (hash & 0xFFFF) / (float) 0xFFFF;
+        final float saturation = 0.5f + ((hash >> 16) & 0xFF) / 512f; // 0.5-1.0
+        final float brightness = 0.7f + ((hash >> 24) & 0xFF) / 850f; // 0.7-1.0
+        final int rgb = java.awt.Color.HSBtoRGB(hue, saturation, brightness);
+        return rgb & 0xFFFFFF;
+    }
+
     // --------------------------------------------------------------------- //
 
     private static final class BlockScanResult implements ScanResult {
@@ -412,7 +426,7 @@ public final class ScanResultProviderBlock extends AbstractScanResultProvider {
             }
 
             if (color == 0) {
-                color = DEFAULT_COLOR;
+                color = colorFromRegistryName(BuiltInRegistries.BLOCK.getKey(blockState.getBlock()));
             }
 
             final Tesselator tesselator = Tesselator.getInstance();

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "scanner",
+  "key": {
+    "s": {
+      "item": "scannable:scanner_2"
+    },
+    "e": {
+      "item": "minecraft:emerald_block"
+    },
+    "p": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "pattern": [
+    "pep",
+    " s ",
+    "p p"
+  ],
+  "result": {
+    "count": 1,
+    "id": "scannable:scanner_3"
+  }
+}

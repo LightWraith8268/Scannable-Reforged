@@ -78,10 +78,10 @@ public final class ScanManager {
 
     // --------------------------------------------------------------------- //
 
-    public static void beginScan(final Player player, final List<ItemStack> stacks) {
+    public static void beginScan(final Player player, final List<ItemStack> stacks, final float baseScanRadius) {
         cancelScan();
 
-        float scanRadius = CommonConfig.baseScanRadius;
+        float scanRadius = baseScanRadius;
 
         final List<ScannerModule> modules = new ArrayList<>();
         for (final ItemStack stack : stacks) {

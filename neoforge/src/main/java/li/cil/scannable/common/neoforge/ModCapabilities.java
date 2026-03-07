@@ -2,10 +2,10 @@ package li.cil.scannable.common.neoforge;
 
 import li.cil.scannable.api.API;
 import li.cil.scannable.api.scanning.ScannerModule;
-import li.cil.scannable.common.config.CommonConfig;
 import li.cil.scannable.common.data.ModDataComponents;
 import li.cil.scannable.common.inventory.ScannerContainer;
 import li.cil.scannable.common.item.Items;
+import li.cil.scannable.common.item.ScannerItem;
 import li.cil.scannable.common.item.ScannerModuleItem;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -23,15 +23,18 @@ public final class ModCapabilities {
 
     @SubscribeEvent
     public static void register(final RegisterCapabilitiesEvent event) {
-        // Energy storage for scanner
+        // Energy storage for all scanner tiers
         event.registerItem(Capabilities.EnergyStorage.ITEM,
-            (stack, context) -> new ComponentEnergyStorage(stack, ModDataComponents.ENERGY.get(), CommonConfig.energyCapacityScanner),
-            Items.SCANNER.get());
+            (stack, context) -> new ComponentEnergyStorage(stack, ModDataComponents.ENERGY.get(),
+                ((ScannerItem) stack.getItem()).getEnergyCapacity()),
+            Items.SCANNER.get(), Items.SCANNER_2.get(), Items.SCANNER_3.get(),
+            Items.SCANNER_4.get(), Items.SCANNER_5.get());
 
-        // Item handler for scanner inventory
+        // Item handler for scanner inventory (all tiers)
         event.registerItem(Capabilities.ItemHandler.ITEM,
             (stack, context) -> new InvWrapper(ScannerContainer.of(stack)),
-            Items.SCANNER.get());
+            Items.SCANNER.get(), Items.SCANNER_2.get(), Items.SCANNER_3.get(),
+            Items.SCANNER_4.get(), Items.SCANNER_5.get());
 
         // Scanner module capability for all module items
         event.registerItem(SCANNER_MODULE,

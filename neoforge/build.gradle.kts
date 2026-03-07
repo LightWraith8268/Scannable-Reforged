@@ -12,6 +12,7 @@ repositories {
 dependencies {
     "neoForge"(libs.neoforge.platform)
     modImplementation(libs.neoforge.architectury)
+    compileOnly(libs.jei.neoforge.api)
 }
 
 tasks {

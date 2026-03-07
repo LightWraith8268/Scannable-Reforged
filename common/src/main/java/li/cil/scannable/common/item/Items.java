@@ -2,6 +2,7 @@ package li.cil.scannable.common.item;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import li.cil.scannable.common.config.CommonConfig;
 import li.cil.scannable.common.scanning.*;
 import li.cil.scannable.util.RegistryUtils;
 import net.minecraft.core.registries.Registries;
@@ -12,7 +13,16 @@ public final class Items {
 
     // --------------------------------------------------------------------- //
 
-    public static final RegistrySupplier<ScannerItem> SCANNER = ITEMS.register("scanner", () -> new ScannerItem(new Item.Properties().stacksTo(1)));
+    public static final RegistrySupplier<ScannerItem> SCANNER = ITEMS.register("scanner",
+        () -> new ScannerItem(new Item.Properties().stacksTo(1), () -> CommonConfig.energyCapacityScanner, () -> CommonConfig.baseScanRadius));
+    public static final RegistrySupplier<ScannerItem> SCANNER_2 = ITEMS.register("scanner_2",
+        () -> new ScannerItem(new Item.Properties().stacksTo(1), () -> CommonConfig.energyCapacityScanner2, () -> CommonConfig.baseScanRadius2));
+    public static final RegistrySupplier<ScannerItem> SCANNER_3 = ITEMS.register("scanner_3",
+        () -> new ScannerItem(new Item.Properties().stacksTo(1), () -> CommonConfig.energyCapacityScanner3, () -> CommonConfig.baseScanRadius3));
+    public static final RegistrySupplier<ScannerItem> SCANNER_4 = ITEMS.register("scanner_4",
+        () -> new ScannerItem(new Item.Properties().stacksTo(1), () -> CommonConfig.energyCapacityScanner4, () -> CommonConfig.baseScanRadius4));
+    public static final RegistrySupplier<ScannerItem> SCANNER_5 = ITEMS.register("scanner_5",
+        () -> new ScannerItem(new Item.Properties().stacksTo(1), () -> CommonConfig.energyCapacityScanner5, () -> CommonConfig.baseScanRadius5));
 
     public static final RegistrySupplier<Item> BLANK_MODULE = ITEMS.register("blank_module", ModItem::new);
     public static final RegistrySupplier<ScannerModuleItem> RANGE_MODULE = ITEMS.register("range_module", () -> new ScannerModuleItem(RangeScannerModule.TIER_1));

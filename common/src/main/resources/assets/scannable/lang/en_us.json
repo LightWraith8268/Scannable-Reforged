@@ -1,9 +1,17 @@
 {
   "itemGroup.scannable.common": "Scannable Reforged",
 
-  "item.scannable.scanner": "Scanner",
+  "item.scannable.scanner": "Scanner I",
   "item.scannable.scanner.desc": "Use to scan for nearby points of interest.",
   "item.scannable.scanner.energy": "Energy: %s/%s",
+  "item.scannable.scanner_2": "Scanner II",
+  "item.scannable.scanner_2.desc": "An improved scanner with increased energy capacity and range.",
+  "item.scannable.scanner_3": "Scanner III",
+  "item.scannable.scanner_3.desc": "An advanced scanner with greatly increased energy capacity and range.",
+  "item.scannable.scanner_4": "Scanner IV",
+  "item.scannable.scanner_4.desc": "A high-end scanner with massive energy capacity and range.",
+  "item.scannable.scanner_5": "Scanner V",
+  "item.scannable.scanner_5.desc": "The ultimate scanner with unmatched energy capacity and range.",
   "item.scannable.blank_module": "Blank Scanner Module",
   "item.scannable.range_module": "Scanner Module: Range I",
   "item.scannable.range_module.desc": "Increase the range of scans.",
